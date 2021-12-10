@@ -1,6 +1,8 @@
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Arrays;
+import java.util.List;
 
 public class Server {
 
@@ -19,7 +21,18 @@ public class Server {
         BufferedReader inServer = new BufferedReader(new InputStreamReader(socClient.getInputStream()));
         PrintWriter outServer = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socClient.getOutputStream())), true);
 
-        // todo: implement the scenario
+        ////////////////////////////////////////////////////
+        String str=inServer.readLine();
+        List<Character> vowels= Arrays.asList('o','i','y','e','a','u');
+        String output="";
+        for (int i=0;i<str.length();i++){
+            char c=str.charAt(i);
+            if(!(vowels.contains(Character.toLowerCase(c)))){
+                output+=c;
+            }
+        }
+        outServer.println(output);
+        ////////////////////////////////////////////////////
 
         // Close in / out
         inServer.close();
